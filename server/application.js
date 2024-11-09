@@ -19,10 +19,10 @@ application.use("/static", express.static("public"));
 application.use(cookieParser());
 
 // Application routes 
-import { authenticationRouter } from "./routes/authentication.routes.js";
-import { tokenRouter } from "./routes/newAccessToken.routes.js";
+// import { authenticationRouter } from "./routes/authentication.routes.js"; 
+// import { tokenRouter } from "./routes/newAccessToken.routes.js"; 
 
-application.use("/api/auth", authenticationRouter);
-application.use("/api/token", tokenRouter);
+// application.use("/api/auth", authenticationRouter); 
+// application.use("/api/token", tokenRouter); 
 
 export { application };
