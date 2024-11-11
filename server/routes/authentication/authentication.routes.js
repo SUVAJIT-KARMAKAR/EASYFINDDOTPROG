@@ -4,7 +4,7 @@ import {
     handle_user_logout,
     handle_user_registration,
     handle_user_validation
-} from "../../controllers";
+} from "../../controllers/authentication/authentication.controller.js";
 
 
 export const authenticationRouter = Router();

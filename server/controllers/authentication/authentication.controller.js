@@ -107,4 +107,6 @@ export const handle_user_login = async (request, response) => {
 export const handle_user_logout = (request, response) => {}
 
 // GET : User authentication validation 
-export const handle_user_validation = (request, response) => {}
+export const handle_user_validation = (request, response) => {
+    return sendresponse(response, 200, "VALIDATION SUCCESSFULL !", request.existing_user);
+}
