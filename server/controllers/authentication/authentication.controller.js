@@ -104,7 +104,40 @@ export const handle_user_login = async (request, response) => {
 }
 
 // POST : User logout 
-export const handle_user_logout = (request, response) => {}
+export const handle_user_logout = async (request, response) => {
+    const { userid } = request.body;
+    // Checking if the userid exist or not 
+    if ( !userid ) {
+        return sendresponse(response, 400, "USER FALIED TO LOGOUT !");
+    }
+    // Error handling 
+    try {
+        // Checking if the user exists with the associated userid 
+        const existing_user = await userModel.findOne({ _id: userid });
+        existing_user.refresh_token = "";
+        await existing_user.save();
+
+        return response 
+            .status(200)
+            .cookie("access_token", "", {
+                httpOnly : true,
+                secure : true,
+                sameSite : "None"
+            })
+            .cookie("refresh_token", "", {
+                httpOnly : true,
+                secure : true,
+                sameSite : "None"
+            })
+            .json({
+                message : "USER LOGGED OUT SUCCESSFULLY !",
+                date : "None",
+                error : "None"
+            })
+    } catch ( error ) {
+        return sendresponse(response, 500, "INTENAL SERVER ERROR", null, error);
+    }
+}
 
 // GET : User authentication validation 
 export const handle_user_validation = (request, response) => {
